@@ -1,10 +1,13 @@
-<?php session_start();?>
+<?php
+session_start();
+?>
 
 <html>
 <head>
 <title>注册</title>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <!--------------------------------------------------------------
 --省的字段是：province
 --市的字段是：city
@@ -57,7 +60,6 @@ function queryCity(citycode){//执行程序查询，查询城市的
 	type="city";//表示类型，查询城市处理显示的时候需要用到
 	var url='diquapi.php?provincecode='+citycode+'&n='+Math.random();//设定URL传值方法同时防止缓存
 	xmlHttp.open("GET",url,true);//建立服务器连接，异步传输tree
-  //alert('see');
 	xmlHttp.onreadystatechange=handleStateChange;//处理这个响应所需要的函数
         
 	xmlHttp.send(null);//执行程序函数这里的中间的参数是因为GET原因
@@ -89,7 +91,6 @@ function getLocation()
             if (navigator.geolocation)
             {
                     navigator.geolocation.getCurrentPosition(showPosition,showError);
-              //navigator.geolocation.watchPosition(showPosition,showError);
             }
             else
             {
@@ -97,31 +98,12 @@ function getLocation()
                     detailsDiv.innerHTML="浏览器不支持HTML5定位";
             }
 }
-  
-  
-  /////////////////////////////////////
 function showPosition(position)
 {
 
-  //distance = getDistance(position.coords.latitude,position.coords.longitude,homeLatitude,homeLongitude);
-  //alert( position.coords.latitude );
         document.getElementById('longitude').value=position.coords.longitude;
         document.getElementById('latitude').value=position.coords.latitude;
         document.getElementById('getYourLocation').innerHTML="✔已经获取您的地理位置";
-  //return true;
-  //document.getElementById('geoDetail').innerHTML="纬度: " + position.coords.latitude + 
-  //	"经度: " + position.coords.longitude;
-  //document.getElementById('geoImage').innerHTML="<img src=\"http://api.map.baidu.com/staticimage?width=200&height=150&center="+position.coords.longitude+","+position.coords.latitude+"&zoom=17\" />";
-  //      document.getElementById('geoImage').style.backgroundImage
-  //      ="url(http://lxhao.sinaapp.com/geofix.php?longitude="+position.coords.longitude+"&latitude="+position.coords.latitude+")"; //改变背景图片  
-         //"<br />距离(<span id=\"currentPlace\">"+( currentPlace ? currentPlace : "地心")+"</span>): <span id=\"distance\">" + distance+"</span>公里";
-  //latitudeInput.value=position.coords.latitude;
-  //	longitudeInput.value=position.coords.longitude;
-  //	if(  distance<= ALERT_DISTANCE && alertSwitch == false )
-  //	{
-  //		showAlert();
-		//alert('到了哦');
-  //	}
 }
 
 function showError(error)
@@ -144,14 +126,10 @@ function showError(error)
 	}
         
          errorMsg = errorMsg+"\n请使用chrome或safari浏览器，在弹出的允许获取地理位置提示时，点击允许。";
-  //alert(errorMsg);
          if(alertFlag==0)alert(errorMsg);
         alertFlag=1;
 }
-
-  //getLocation();
 onload = function(){
-  //	select();
   getLocation();
   window.setInterval(getLocation,10000);
   document.getElementById("province").options[0].selected=true; 
@@ -159,66 +137,70 @@ onload = function(){
 // --></script>
 </head>
 <body>
-  <?php include 'inc/nav.php';?>
+  <?php
+include 'inc/nav.php';
+?>
 <?php
+
 include 'inc/conn.php';
-	$sql="select * from province";//查询数据库province表也就是省
-	$result=mysql_query($sql);//执行语句赋值给变量
-	?>
+$sql = "select * from province"; //查询数据库province表也就是省
+$result = mysql_query($sql); //执行语句赋值给变量
+?>
  
-	<form id='form1' action="createUser.php" method="post"><!--输出表单头-->
-          账号:<input name="username"><br />
-          密码:<input name="password" type="password"><br />
-          性别:
-          <input type="radio" name="gender" value="1" checked>男
-          <input type="radio" name="gender" value="2"> 女<br />
+	<form id='form1' action="createUser.php" method="post"><!--输出表单头--> 账号:<input
+	name="username"><br />
+密码:<input name="password" type="password"><br />
+性别: <input type="radio" name="gender" value="1" checked>男 <input
+	type="radio" name="gender" value="2"> 女<br />
           
           
-          <?php if(strpos($_SERVER["HTTP_USER_AGENT"],"iPod") || strpos($_SERVER["HTTP_USER_AGENT"],"iPhone") || strpos($_SERVER["HTTP_USER_AGENT"],"iPad")){?>
+          <?php
+        if (strpos($_SERVER["HTTP_USER_AGENT"], "iPod") || strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") || strpos($_SERVER["HTTP_USER_AGENT"], "iPad")) {
+            ?>
           头像:
-          <span id="picUrl"><img height="30" src="./static/images/iphoneAvater.png" /></span>(IOS浏览器无法更换)
-          <div style="clear:both;"></div>
-          <input type="hidden" id="avater" name="avater" value="./static/images/iphoneAvater.png">
-          <?php }else{?>
+          <span id="picUrl"><img height="30"
+	src="./static/images/iphoneAvater.png" /></span>(IOS浏览器无法更换)
+<div style="clear: both;"></div>
+<input type="hidden" id="avater" name="avater"
+	value="./static/images/iphoneAvater.png">
+          <?php
+        } else {
+            ?>
           
-          <iframe src="./helper/upload.php" style="border:0; padding:0px;margin:0px;width:100%;height:30px;overflow:hidden; line-height:28px;  display:inline;float:left;" ></iframe>
-          <div style="clear:both;"></div>
-          <span id="picUrl"><img height="30" src="./static/images/default.png" /></span>
-          <div style="clear:both;"></div>
-          <input type="hidden" id="avater" name="avater" value="">
-          <?php }?>
+          <iframe src="./helper/upload.php"
+	style="border: 0; padding: 0px; margin: 0px; width: 100%; height: 30px; overflow: hidden; line-height: 28px; display: inline; float: left;"></iframe>
+<div style="clear: both;"></div>
+<span id="picUrl"><img height="30" src="./static/images/default.png" /></span>
+<div style="clear: both;"></div>
+<input type="hidden" id="avater" name="avater" value="">
+          <?php
+        }
+        ?>
           
           家乡:
-	<!--输出下拉列表框，并设定onchange响应事件，把省值传递过去-->
-	<select id='province' name="province" onchange='queryCity(this.options[this.selectedIndex].value)'>
+	<!--输出下拉列表框，并设定onchange响应事件，把省值传递过去--> <select id='province'
+	name="province"
+	onchange='queryCity(this.options[this.selectedIndex].value)'>
 	<!--输出下拉列表项值-->
 	<option value='-1' selected>省份</option>
 	<?php
-	while($row=mysql_fetch_row($result)){
-	//循环循环查询显示省输出数据显示
-		echo "<option value='$row[1]'>$row[2]</option>/n";
-	}
-	?>
-	</select><!--下拉列表项尾数-->
-	<span id='city'></span><!--显示数据的城市的位置-->
-          <span id='area'></span><!--显示数据的城市的位置-->
-          <br />
-          生日:<input name="birthday" type="date" value="1985-01-01"><br />
-          电话:<input name="phone"><br />
-          QQ:<input name="qq"><br />
-          微博:<input name="weibo"><br />
-          爱好:<input name="hobby"><br />
-          <input type="hidden" id="longitude" name="longitude">
-          <input type="hidden"  id="latitude" name="latitude">
-          <input class="subbtn"  type="submit" value="注册找老乡" />
-	</form><!--表单项结尾-->
-  <div class="alertBox" id="getYourLocation">☹正在获取你的位置...<br />请在弹出的获取地理位置信息中选择允许，如已禁止获取，请在设置内取消禁止设置</div>
-        
-  <!--
-  <hr />
-  
-  <div style="font-size:12px;">位置:<span id="geoDetail">无法获取</span></div>
-  <div style="width:100%;height:200px;" id="geoImage"></div>
-  -->
+while ($row = mysql_fetch_row($result)) {
+    //循环循环查询显示省输出数据显示
+    echo "<option value='$row[1]'>$row[2]</option>/n";
+}
+?>
+	</select><!--下拉列表项尾数--> <span id='city'></span><!--显示数据的城市的位置--> <span
+	id='area'></span><!--显示数据的城市的位置--> <br />
+生日:<input name="birthday" type="date" value="1985-01-01"><br />
+电话:<input name="phone"><br />
+QQ:<input name="qq"><br />
+微博:<input name="weibo"><br />
+爱好:<input name="hobby"><br />
+<input type="hidden" id="longitude" name="longitude"> <input
+	type="hidden" id="latitude" name="latitude"> <input class="subbtn"
+	type="submit" value="注册找老乡" /></form>
+<!--表单项结尾-->
+<div class="alertBox" id="getYourLocation">☹正在获取你的位置...<br />
+请在弹出的获取地理位置信息中选择允许，如已禁止获取，请在设置内取消禁止设置</div>
 </body>
 </html>

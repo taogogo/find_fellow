@@ -1,7 +1,7 @@
 <?php
-$longitude = $_GET['longitude'];
+$longitude = floatval($_GET['longitude']);
 
-$latitude = $_GET['latitude'];
+$latitude = floatval($_GET['latitude']);
 $markers = $_GET['markers'];
 $markerStyles = $_GET['markerStyles'];
 $labels = $_GET['labels'];
