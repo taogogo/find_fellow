@@ -1,11 +1,12 @@
 <?php
 session_start();
+include './inc/func.php';
 if( empty( $_SESSION['user']['user_id'] )){
   header('location:login.php');
 die('木有登陆');
 }
 
-$userId = $_GET['userId'];
+$userId = intval($_GET['userId']);
 ?>
 <html>
 <head>
@@ -14,7 +15,7 @@ $userId = $_GET['userId'];
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <?php
 include './inc/nav.php';
-include './inc/func.php';
+
 include './inc/conn.php';
 ?>
 
